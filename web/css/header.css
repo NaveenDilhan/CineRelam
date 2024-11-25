@@ -1,0 +1,125 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* Header Container */
+.header-container {
+    display: flex;
+    flex-direction: column;
+    width: 250px; /* Fixed width for sidebar */
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #081A53; /* Deep blue */
+    color: white;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    border-right: 4px solid #fbb03b; /* Yellow border for emphasis */
+    z-index: 1000;
+}
+
+/* Logo Section */
+.logo {
+    text-align: center;
+    margin-bottom: 50px; /* Increased spacing for better balance */
+}
+
+.logo h1 {
+    font-size: 36px;
+    color: #fbb03b; /* Yellow */
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.logo p {
+    font-size: 14px; /* Slightly bigger for readability */
+    margin: 5px 0;
+    color: #ffffff;
+    letter-spacing: 2px;
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    margin-bottom: auto;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    position: relative; /* Needed for positioning the line */
+    padding-left: 10px;
+    transition: color 0.3s, padding-left 0.3s;
+}
+
+.nav-links a::before {
+    content: ''; /* Empty content for the line */
+    position: absolute;
+    left: 0; /* Place the line on the left */
+    top: 50%; /* Center the line vertically */
+    transform: translateY(-50%);
+    width: 0; /* Hidden by default */
+    height: 3px; /* Height of the line */
+    background-color: #fbb03b; /* Yellow line color */
+    transition: width 0.3s; /* Smooth transition effect */
+}
+
+.nav-links a:hover {
+    color: #fbb03b; /* Change text color on hover */
+    padding-left: 20px; /* Adds a smooth left shift effect on hover */
+}
+
+.nav-links a:hover::before {
+    width: 10px; /* Line becomes visible on hover */
+}
+
+/* Buttons */
+.buttons {
+    margin-top: 50px; /* More spacing to give some room at the bottom */
+}
+
+/* Button Styles */
+.login-button, .news-button {
+    width: 100%;
+    padding: 12px; /* Slightly larger padding for better button aesthetics */
+    border: none;
+    cursor: pointer;
+    font-size: 16px; /* Slightly larger text for readability */
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s, transform 0.3s;
+    border-radius: 5px; /* Rounded corners for a more modern look */
+    margin-bottom: 35px;
+    box-sizing: border-box;
+}
+
+/* Login Button */
+.login-button {
+    background-color: #fbb03b; /* Yellow */
+    color: #081A53; /* Deep Blue */
+}
+
+.login-button:hover {
+    background-color: #d99a30; /* Darker yellow on hover */
+    transform: scale(1.05); /* Slight scaling effect on hover */
+}
+
+/* News Button */
+.news-button {
+    background-color: black;
+    color: white;
+}
+
+.news-button:hover {
+    background-color: #333333; /* Darker black on hover */
+    transform: scale(1.05); /* Slight scaling effect on hover */
+}
