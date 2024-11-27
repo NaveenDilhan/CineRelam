@@ -9,13 +9,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Movie Schedule</title>
-        <link rel="stylesheet" href="css/movies.css"> <!-- Link to the updated CSS file -->
-        <!-- Google Fonts for modern typography -->
+        <link rel="stylesheet" href="css/movies.css"> 
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     </head>
     <body>
         <div class="main-content">
-            <h2 class="page-title">Movie Schedule</h2>
+            <h2 class="page-title">Now Showing</h2>
 
             <!-- Movie container with professional design -->
             <div class="movie-container">
@@ -25,67 +24,49 @@
                     ResultSet rs = null;
 
                     try {
-                        conn = Databaseconnection.getConnection(); // Ensure your Databaseconnection is set up correctly
-                        String sql = "SELECT id, title, description, genre, release_date FROM movies";
+                        conn = Databaseconnection.getConnection(); // Ensure Databaseconnection is set up correctly
+                        String sql = "SELECT MovieID, Title, Description, Genre, ReleaseDate, PosterURL FROM Movies";
                         stmt = conn.prepareStatement(sql);
                         rs = stmt.executeQuery();
 
-                        // Date formatter
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
                         while (rs.next()) {
-                            int id = rs.getInt("id");
-                            String title = rs.getString("title");
-                            String description = rs.getString("description");
-                            String genre = rs.getString("genre");
-                            Date releaseDate = rs.getDate("release_date");
+                            int id = rs.getInt("MovieID");
+                            String title = rs.getString("Title");
+                            String description = rs.getString("Description");
+                            String genre = rs.getString("Genre");
+                            Date releaseDate = rs.getDate("ReleaseDate");
+                            String posterURL = rs.getString("PosterURL");
                             String formattedDate = (releaseDate != null) ? sdf.format(releaseDate) : "";
                 %>
                 <!-- Movie card structure -->
-                <div class="movie-card">
-                    <div class="movie-header">
-                        <h3><%= title%></h3>
-                        <span class="movie-genre"><%= genre%></span>
+                <div class="movie-card" style="background-image: url('<%= posterURL %>')">
+                    <div class="movie-overlay">
+                        <div class="movie-header">
+                            <h3><%= title %></h3>
+                            <span class="movie-genre"><%= genre %></span>
+                        </div>
+                        <div class="movie-actions">
+                            <a href="movieDetails.jsp?id=<%= id %>" class="btn info-btn">More Info</a>
+                            <a href="bookTicket.jsp?id=<%= id %>" class="btn book-btn">Book Ticket</a>
+                        </div>
                     </div>
-                    <p class="movie-description"><%= description%></p>
-                    <p class="release-date">Release Date: <%= formattedDate%></p>
                 </div>
                 <%
                         }
                     } catch (SQLException e) {
                         out.println("<p class='error'>Error fetching data: " + e.getMessage() + "</p>");
-                        e.printStackTrace(); // To see detailed error
-                    } catch (Exception e) {
-                        out.println("<p class='error'>General error: " + e.getMessage() + "</p>");
-                        e.printStackTrace(); // To see detailed error
+                        e.printStackTrace(); // Log error
                     } finally {
-                        try {
-                            if (rs != null) {
-                                rs.close();
-                            }
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                            if (stmt != null) {
-                                stmt.close();
-                            }
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-                        try {
-                            if (conn != null) {
-                                conn.close();
-                            }
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
+                        if (rs != null) try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+                        if (stmt != null) try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+                        if (conn != null) try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
                     }
                 %>
             </div>
         </div>
 
-        <!-- Footer included from footer.jsp -->
         <%@ include file="footer.jsp" %>
     </body>
 </html>
