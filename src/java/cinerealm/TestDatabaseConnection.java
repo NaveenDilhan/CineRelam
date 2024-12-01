@@ -1,6 +1,6 @@
-package movieschedule;
+package cinerealm;
 
-import movieschedule.Databaseconnection;
+import cinerealm.Databaseconnection;
 import java.sql.Connection;
 import java.sql.SQLException;
 

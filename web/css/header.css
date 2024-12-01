@@ -14,7 +14,7 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #081A53; /* Deep blue */
+    background: linear-gradient(115deg, #12063b, #09555c); /* Deep blue */
     color: white;
     padding: 30px 20px;
     box-sizing: border-box;

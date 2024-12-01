@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+                             http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+
+    <!-- Application Description -->
+    <display-name>Cinerealm Movie Booking</display-name>
+
+    <!-- Filter for setting character encoding -->
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- Servlet configuration for SelectScreeningServlet -->
+    <servlet>
+        <servlet-name>SelectScreeningServlet</servlet-name>
+        <servlet-class>cinerealm.SelectScreeningServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SelectScreeningServlet</servlet-name>
+        <url-pattern>/select-screening</url-pattern>
+    </servlet-mapping>
+
+    <!-- Servlet configuration for SelectSeatServlet -->
+    <servlet>
+        <servlet-name>SelectSeatServlet</servlet-name>
+        <servlet-class>cinerealm.SelectSeatServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SelectSeatServlet</servlet-name>
+        <url-pattern>/select-seat</url-pattern>
+    </servlet-mapping>
+
+    <!-- Welcome File (default page) -->
+    <welcome-file-list>
+        <welcome-file>homepage.jsp</welcome-file>
+    </welcome-file-list>
+
+</web-app>

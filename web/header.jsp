@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CineRealm -Home</title>
     <link rel="stylesheet" href="css/header.css">
 </head>
 <body>
@@ -15,7 +14,7 @@
             </div>
             <nav class="nav-links">
                 <a href="#">HOME</a>
-                <a href="#">MOVIES</a>
+                <a href="movies.jsp">MOVIES</a>
                 <a href="#">DEALS & EXCLUSIVES</a>
                 <a href="#">LOCATIONS</a>
             </nav>

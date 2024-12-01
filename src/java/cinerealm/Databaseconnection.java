@@ -1,4 +1,4 @@
-package movieschedule;
+package cinerealm;
 
 
 import java.sql.Connection;
