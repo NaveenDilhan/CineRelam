@@ -9,11 +9,11 @@
     <div class="header-container">
         <div class="sidebar">
             <div class="logo">
-                <h1>CineRealm</h1>
-                <p>Watch More</p>
+                <!-- Interactive and Enlarged PNG Logo -->
+                <img src="img/cinerealm-logo.png" alt="CineRealm Logo" class="logo-img">           
             </div>
             <nav class="nav-links">
-                <a href="#">HOME</a>
+                <a href="homepage">HOME</a>
                 <a href="movies.jsp">MOVIES</a>
                 <a href="#">DEALS & EXCLUSIVES</a>
                 <a href="#">LOCATIONS</a>

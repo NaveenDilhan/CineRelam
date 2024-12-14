@@ -1,122 +1,122 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="model.Screening" %>
 <%@ page import="java.util.List" %>
-<%@ page import="model.Screening" %> <!-- Adjust package as per your project -->
-
+<%@ page import="model.Movie" %>
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Select Screening</title>
-        <link rel="stylesheet" type="text/css" href="css/book-ticket.css">
-    </head>
-    <body>
-        <!-- Navigation Bar -->
-        <header class="navbar">
-            <div class="navbar-item dropdown">
-                <button class="dropdown-btn">All Locations</button>
-                <div class="dropdown-content">
-                    <%
-                        List<String> locations = (List<String>) request.getAttribute("locations");
-                        if (locations != null && !locations.isEmpty()) {
-                            for (String location : locations) {
-                    %>
-                        <a href="#"><%= location %></a>
-                    <%
-                            }
-                        } else {
-                    %>
-                        <a href="#">No locations available</a>
-                    <%
-                        }
-                    %>
-                </div>
-            </div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter Screenings</title>
+    <link rel="stylesheet" href="css/book-ticket.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        // Function to fetch screenings via AJAX
+        function fetchScreenings() {
+            var movieName = $("#movieName").val();
+            var location = $("#location").val();
+            var experience = $("#experience").val();
 
-            <div class="navbar-item dropdown">
-                <button class="dropdown-btn">Today</button>
-                <div class="dropdown-content">
-                    <input type="date" id="date" name="date" class="date-picker">
-                </div>
-            </div>
+            // Disable the filter while waiting for the data
+            $("#screeningsList").html("<li>Loading screenings...</li>");
 
-            <div class="navbar-item dropdown">
-                <button class="dropdown-btn">All Movies</button>
-                <div class="dropdown-content">
-                    <%
-                        List<String> movies = (List<String>) request.getAttribute("movies");
-                        if (movies != null && !movies.isEmpty()) {
-                            for (String movie : movies) {
-                    %>
-                        <a href="#"><%= movie %></a>
-                    <%
-                            }
-                        } else {
-                    %>
-                        <a href="#">No movies available</a>
-                    <%
-                        }
-                    %>
-                </div>
-            </div>
+            $.ajax({
+                url: "FilterScreenServlet", // The servlet URL
+                type: "POST",
+                data: {
+                    movieName: movieName,
+                    location: location,
+                    experience: experience
+                },
+                dataType: "json", // Expecting JSON response
+                success: function(data) {
+                    var screeningsList = $("#screeningsList");
+                    screeningsList.empty(); // Clear the current list
 
-            <div class="navbar-item dropdown">
-                <button class="dropdown-btn">All Experiences</button>
-                <div class="dropdown-content">
-                    <%
-                        List<String> experiences = (List<String>) request.getAttribute("experiences");
-                        if (experiences != null && !experiences.isEmpty()) {
-                            for (String experience : experiences) {
-                    %>
-                        <a href="#"><%= experience %></a>
-                    <%
-                            }
-                        } else {
-                    %>
-                        <a href="#">No experiences available</a>
-                    <%
-                        }
-                    %>
-                </div>
-            </div>
-
-            <button class="offers-btn navbar-item">All Offers</button>
-        </header>
-
-        <!-- Movie Listings -->
-        <main class="movie-listing">
-            <section class="movie-header">
-                <h1 class="movie-title">Now Showing</h1>
-            </section>
-
-            <div class="movie-content">
-                <%
-                    // Fetch the list of screenings passed from the servlet
-                    List<Screening> screenings = (List<Screening>) request.getAttribute("screenings");
-                    if (screenings != null && !screenings.isEmpty()) {
-                        for (Screening screening : screenings) {
-                %>
-                <div class="movie-details">
-                    <div class="theater">
-                        <p class="theater-name"><%= screening.getTheaterName() %></p>
-                        <button class="time-btn"><%= screening.getScreeningTime() %></button> <!-- Time of screening -->
-                    </div>
-                </div>
-                <div class="movie-poster">
-                    <img src="<%= screening.getPosterUrl() %>" alt="<%= screening.getMovieName() %> Poster" />
-                </div>
-                <%
-                        }
+                    if (data.length > 0) {
+                        data.forEach(function(screening) {
+                            var listItem = `
+                                <li>
+                                    <div class="screening-item">
+                                        <h3>${screening.movieTitle}</h3>
+                                        <p><strong>Location:</strong> ${screening.location} <strong>Experience:</strong> ${screening.experience}</p>
+                                        <p><strong>Date:</strong> ${screening.screeningDate} <strong>Time:</strong> ${screening.screeningTime}</p>
+                                        <p><a href="movie-details.jsp?movieId=${screening.movieID}">View Movie Details</a></p>
+                                    </div>
+                                </li>`;
+                            screeningsList.append(listItem);
+                        });
                     } else {
-                %>
-                <p>No screenings available at the moment.</p>
-                <%
+                        screeningsList.html("<li>No screenings available</li>");
                     }
-                %>
-            </div>
-        </main>
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX Error: " + error);
+                    $("#screeningsList").html("<li>Error loading screenings. Please try again later.</li>");
+                }
+            });
+        }
 
-        <!-- Footer -->
-        <footer>
-            <p>© 2024 Cinema Realm. All Rights Reserved.</p>
-        </footer>
-    </body>
+        // Attach event listeners to filter selects
+        $(document).ready(function() {
+            $("#movieName, #location, #experience").on("change", fetchScreenings);
+        });
+    </script>
+</head>
+<body>
+    <h1>Filter Screenings</h1>
+
+    <!-- Filter Form (no need for form submission) -->
+    <div class="filter-section">
+        <label for="movieName">Movie Name:</label>
+        <select id="movieName">
+            <option value="">-- Select Movie --</option>
+            <%
+                List<String> movieTitles = (List<String>) request.getAttribute("movieTitles");
+                if (movieTitles != null && !movieTitles.isEmpty()) {
+                    for (String title : movieTitles) {
+                        out.println("<option value='" + title + "'>" + title + "</option>");
+                    }
+                } else {
+                    out.println("<option>No movies available</option>");
+                }
+            %>
+        </select>
+
+        <label for="location">Location:</label>
+        <select id="location">
+            <option value="">-- Select Location --</option>
+            <%
+                List<String> locations = (List<String>) request.getAttribute("locations");
+                if (locations != null && !locations.isEmpty()) {
+                    for (String loc : locations) {
+                        out.println("<option value='" + loc + "'>" + loc + "</option>");
+                    }
+                } else {
+                    out.println("<option>No locations available</option>");
+                }
+            %>
+        </select>
+
+        <label for="experience">Experience:</label>
+        <select id="experience">
+            <option value="">-- Select Experience --</option>
+            <%
+                List<String> experiences = (List<String>) request.getAttribute("experiences");
+                if (experiences != null && !experiences.isEmpty()) {
+                    for (String exp : experiences) {
+                        out.println("<option value='" + exp + "'>" + exp + "</option>");
+                    }
+                } else {
+                    out.println("<option>No experiences available</option>");
+                }
+            %>
+        </select>
+    </div>
+
+    <h2>Available Screenings</h2>
+    <ul id="screeningsList">
+        <!-- Screenings will be displayed here after AJAX call -->
+    </ul>
+</body>
 </html>

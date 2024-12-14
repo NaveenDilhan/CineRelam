@@ -28,18 +28,16 @@ body {
     margin-bottom: 50px; /* Increased spacing for better balance */
 }
 
-.logo h1 {
-    font-size: 36px;
-    color: #fbb03b; /* Yellow */
-    margin: 0;
-    letter-spacing: 1px;
+.logo-img {
+    width: 200px; /* Larger size */
+    height: auto; /* Maintain aspect ratio */
+    transition: transform 0.3s, filter 0.3s; /* Smooth hover effect */
+    cursor: pointer; /* Change cursor to indicate interactivity */
 }
 
-.logo p {
-    font-size: 14px; /* Slightly bigger for readability */
-    margin: 5px 0;
-    color: #ffffff;
-    letter-spacing: 2px;
+.logo-img:hover {
+    transform: scale(1.1); /* Slight enlargement on hover */
+    filter: brightness(1.2); /* Brighten the image on hover */
 }
 
 /* Navigation Links */

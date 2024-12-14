@@ -7,67 +7,100 @@ import cinerealm.Databaseconnection;
 import model.Movie;
 
 public class MovieDAO {
+
+    // Fetch all movies
     public List<Movie> getAllMovies() throws SQLException {
         List<Movie> movies = new ArrayList<>();
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-
-        try {
-            conn = Databaseconnection.getConnection();
-            String sql = "SELECT MovieID, Title, Description, Genre, ReleaseDate, PosterURL, DurationMinutes FROM Movies";
-            stmt = conn.prepareStatement(sql);
-            rs = stmt.executeQuery();
+        String sql = "SELECT MovieID, Title, Description, Genre, ReleaseDate, PosterURL, DurationMinutes FROM Movies";
+        
+        try (Connection conn = Databaseconnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                Movie movie = new Movie();
-                movie.setId(rs.getInt("MovieID"));
-                movie.setTitle(rs.getString("Title"));
-                movie.setDescription(rs.getString("Description"));
-                movie.setGenre(rs.getString("Genre"));
-                movie.setReleaseDate(rs.getDate("ReleaseDate"));
-                movie.setPosterURL(rs.getString("PosterURL"));
-                movie.setDurationMinutes(rs.getInt("DurationMinutes"));
-                movies.add(movie);
+                movies.add(extractMovieFromResultSet(rs));
             }
-        } finally {
-            if (rs != null) try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
-            if (stmt != null) try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
-            if (conn != null) try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
         }
-
         return movies;
     }
 
+    // Fetch all movie titles
+    public List<String> getAllMovieTitles() {
+        List<String> movieTitles = new ArrayList<>();
+        String query = "SELECT Title FROM movies";
+        
+        try (Connection conn = Databaseconnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                movieTitles.add(rs.getString("Title"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return movieTitles;
+    }
+
+    // Fetch movie by ID
     public Movie getMovieById(int movieId) throws SQLException {
         Movie movie = null;
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-
-        try {
-            conn = Databaseconnection.getConnection();
-            String sql = "SELECT MovieID, Title, Description, Genre, ReleaseDate, PosterURL, DurationMinutes FROM Movies WHERE MovieID = ?";
-            stmt = conn.prepareStatement(sql);
+        String sql = "SELECT MovieID, Title, Description, Genre, ReleaseDate, PosterURL, DurationMinutes FROM Movies WHERE MovieID = ?";
+        
+        try (Connection conn = Databaseconnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, movieId);
-            rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                movie = new Movie();
-                movie.setId(rs.getInt("MovieID"));
-                movie.setTitle(rs.getString("Title"));
-                movie.setDescription(rs.getString("Description"));
-                movie.setGenre(rs.getString("Genre"));
-                movie.setReleaseDate(rs.getDate("ReleaseDate"));
-                movie.setPosterURL(rs.getString("PosterURL"));
-                movie.setDurationMinutes(rs.getInt("DurationMinutes"));
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    movie = extractMovieFromResultSet(rs);
+                }
             }
-        } finally {
-            if (rs != null) try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
-            if (stmt != null) try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
-            if (conn != null) try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
         }
+        return movie;
+    }
 
+    // Fetch movies that are currently showing
+    public List<Movie> getNowShowingMovies() throws SQLException {
+        List<Movie> movies = new ArrayList<>();
+        String sql = "SELECT * FROM Movies WHERE Date(ReleaseDate) <= CURDATE()"; // Customize as needed
+        
+        try (Connection conn = Databaseconnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                movies.add(extractMovieFromResultSet(rs));
+            }
+        }
+        return movies;
+    }
+
+    // Fetch movies that are coming soon
+    public List<Movie> getComingSoonMovies() throws SQLException {
+        List<Movie> movies = new ArrayList<>();
+        String sql = "SELECT * FROM Movies WHERE Date(ReleaseDate) > CURDATE()"; // Customize as needed
+        
+        try (Connection conn = Databaseconnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                movies.add(extractMovieFromResultSet(rs));
+            }
+        }
+        return movies;
+    }
+
+    // Helper method to extract movie details from ResultSet
+    private Movie extractMovieFromResultSet(ResultSet rs) throws SQLException {
+        Movie movie = new Movie();
+        movie.setId(rs.getInt("MovieID"));
+        movie.setTitle(rs.getString("Title"));
+        movie.setDescription(rs.getString("Description"));
+        movie.setGenre(rs.getString("Genre"));
+        movie.setReleaseDate(rs.getDate("ReleaseDate"));
+        movie.setPosterURL(rs.getString("PosterURL"));
+        movie.setDurationMinutes(rs.getInt("DurationMinutes"));
         return movie;
     }
 }

@@ -46,7 +46,7 @@
                         </div>
                         <div class="movie-actions">
                             <a href="movie-details.jsp?id=<%= movie.getId() %>" class="btn info-btn">More Info</a>
-                            <a href="bookTicket.jsp?id=<%= movie.getId() %>" class="btn book-btn">Book Ticket</a>
+                            <a href="FilterScreenServlet?id=<%= movie.getId() %>" class="btn book-btn">Book Ticket</a>
                         </div>
                     </div>
                 </div>

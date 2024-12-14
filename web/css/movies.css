@@ -1,9 +1,9 @@
 /* Main Content */
 .main-content {
-    margin-left: 270px; /* Leaves space for sidebar */
+    margin-left: 250px; /* Leaves space for sidebar */
     padding: 20px;
     box-sizing: border-box;
-    background-color: #f8f8fb; /* Lighter background for a clean look */
+    background: linear-gradient(to right, #d7d2cc 0%, #304352 100%); /* Lighter background for a clean look */
     min-height: 100vh; /* Ensure full page height */
 }
 
@@ -57,7 +57,7 @@
 .movie-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 30px;
     justify-content: flex-start; /* Align cards to the left */
 }
 

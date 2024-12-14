@@ -1,0 +1,239 @@
+/* General Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121212; /* Dark background for a cinematic feel */
+  color: #f0f0f0;
+  line-height: 1.6;
+}
+
+/* Main Content */
+.main-content {
+  margin-left: 250px; 
+  padding: 20px;
+}
+
+/* Section Titles */
+.section-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #fbb03b;
+  text-align: center;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+  transition: all 0.3s ease;
+}
+
+.section-title:hover {
+  color: #f0f0f0;
+  text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.9);
+}
+
+/* Hero Section */
+.hero-section {
+  margin-bottom: 60px;
+}
+
+.hero-carousel {
+  position: relative;
+  height: 550px;
+  overflow: hidden; /* Hide overflow for smooth transitions */
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+.hero-carousel .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  opacity: 0;
+  visibility: hidden; /* Hide slides initially */
+  transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+}
+
+.hero-carousel .swiper-slide-active {
+  opacity: 1;
+  visibility: visible; /* Ensure the active slide is visible */
+}
+
+.hero-text {
+  position: absolute;
+  top: 25%;
+  left: 10%;
+  z-index: 10;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.4;
+  transition: transform 0.5s ease;
+}
+
+.hero-text h3 {
+  font-size: 42px;
+  color: #fbb03b;
+  font-weight: bold;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+  margin: 0;
+  margin-bottom: 30px; /* Increased space between title and buttons */
+}
+
+.hero-carousel .swiper-slide:hover .hero-text {
+  transform: translateX(10px);
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+  filter: brightness(50%);
+  transition: filter 0.3s ease;
+}
+
+.hero-carousel .swiper-slide:hover .hero-image {
+  filter: brightness(60%);
+}
+
+.btn {
+  padding: 15px 30px;
+  background-color: #fbb03b;
+  color: #000;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 20px; /* Added space between button and previous elements */
+}
+
+.btn:hover {
+  background-color: #e8a900;
+  transform: scale(1.05);
+}
+
+.hero-carousel .swiper-button-next,
+.hero-carousel .swiper-button-prev {
+  color: #fbb03b;
+}
+
+.hero-carousel .swiper-pagination {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15; /* Ensure pagination dots appear above the slides */
+}
+
+/* Coming Soon Section */
+.coming-soon {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.coming-soon-carousel {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  overflow-x: scroll;
+  padding-bottom: 40px;
+}
+
+.coming-soon-carousel .swiper-slide {
+  width: 200px;
+  text-align: center;
+}
+
+.poster-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.poster-image:hover {
+  transform: scale(1.05);
+}
+
+.movie-title {
+  margin: 15px 0;
+  font-size: 22px;
+  color: #fbb03b;
+  font-weight: bold;
+}
+
+.coming-soon-carousel .swiper-button-next,
+.coming-soon-carousel .swiper-button-prev {
+  color: #fbb03b;
+}
+
+.coming-soon-carousel .swiper-pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Deals & Exclusive Section */
+.deals-section {
+  margin-top: 50px;
+}
+
+.deals-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.deal-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  overflow: hidden;
+  width: 320px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.deal-card:hover {
+  transform: translateY(-10px);
+}
+
+.deal-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 2px solid #fbb03b;
+}
+
+.deal-info {
+  padding: 20px;
+}
+
+.deal-info h3 {
+  font-size: 26px;
+  color: #fbb03b;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.btn.more-info {
+  padding: 14px 28px;
+  background: #fbb03b;
+  color: #000;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn.more-info:hover {
+  background-color: #e8a900;
+  transform: scale(1.05);
+}
