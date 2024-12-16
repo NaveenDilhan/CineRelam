@@ -6,14 +6,16 @@ public class Seats {
     private String rowNumber;
     private int screeningID;
     private boolean isBooked;
+    private double price; // New field for price
 
     // Constructor
-    public Seats(int seatID, String seatNumber, String rowNumber, int screeningID, boolean isBooked) {
+    public Seats(int seatID, String seatNumber, String rowNumber, int screeningID, boolean isBooked, double price) {
         this.seatID = seatID;
         this.seatNumber = seatNumber;
         this.rowNumber = rowNumber;
         this.screeningID = screeningID;
         this.isBooked = isBooked;
+        this.price = price; // Initialize price
     }
 
     // Getters
@@ -37,6 +39,10 @@ public class Seats {
         return isBooked;
     }
 
+    public double getPrice() {
+        return price; // Getter for price
+    }
+
     // Setters
     public void setSeatID(int seatID) {
         this.seatID = seatID;
@@ -58,6 +64,10 @@ public class Seats {
         this.isBooked = isBooked;
     }
 
+    public void setPrice(double price) {
+        this.price = price; // Setter for price
+    }
+
     @Override
     public String toString() {
         return "Seat{" +
@@ -66,6 +76,7 @@ public class Seats {
                 ", rowNumber='" + rowNumber + '\'' +
                 ", screeningID=" + screeningID +
                 ", isBooked=" + isBooked +
+                ", price=" + price + // Add price to the string representation
                 '}';
     }
 }

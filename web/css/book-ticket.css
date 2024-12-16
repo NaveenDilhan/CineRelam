@@ -6,6 +6,7 @@ body {
     background-color: #121212; /* Dark background for a cinematic feel */
     color: #f4f4f4;
     line-height: 1.6;
+    transition: background-color 0.3s ease;
 }
 
 /* Container */
@@ -19,38 +20,125 @@ body {
     overflow: hidden;
 }
 
+/* Page Title */
+.page-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #fbb03b;
+    text-align: center;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+    transition: all 0.3s ease;
+}
+.page-title:hover {
+    color: #f0f0f0;
+    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.9);
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    font-size: 14px;
+    color: #ffa31a; /* Updated text color */
+    background-color: #121212; /* Updated background color */
+    padding: 8px 16px;
+    border-radius: 5px; /* Rounded corners */
+    display: inline-block;
+    margin-bottom: 20px; /* Space between breadcrumb and separator line */
+}
+
+.breadcrumb a {
+    text-decoration: none;
+    color: #ffa31a; /* Updated text color */
+    font-weight: 600;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+    color: #ffa31a; /* Hover effect to maintain consistency */
+}
+
+.breadcrumb span {
+    color: #ffa31a; /* Updated text color */
+}
+
+/* Separator Line */
+.separator {
+    border: 0;
+    height: 1px;
+    background-color: #ffa31a; /* Updated color for separator */
+    margin-top: 20px;
+    margin-bottom: 40px; /* Increased space after the line */
+}
+
 /* Filter Section */
 .filter-section {
     display: flex;
-    gap: 20px;
+    gap: 15px;
     margin-bottom: 40px;
     justify-content: flex-start;
     align-items: center;
+    flex-wrap: wrap; /* Allows wrapping for smaller screens */
+    opacity: 0;
+    animation: fadeIn 1s forwards; /* Fade-in effect for filter section */
 }
 
 .filter-section label {
     font-weight: 600;
-    font-size: 18px; /* Slightly larger font size for labels */
-    color: #ccc; /* Light grey text for a subtle contrast */
+    font-size: 14px; /* Smaller font size */
+    color: #ccc;
     text-transform: uppercase;
+    margin-right: 10px;
+    transition: color 0.3s ease;
+}
+
+.filter-section label:hover {
+    color: #fbb03b; /* Hover effect on labels */
 }
 
 .filter-section select {
-    padding: 12px 18px;
-    font-size: 16px;
-    border-radius: 12px;
-    border: 1px solid #ccc;
-    background-color: #2a2a2a; /* Dark background for select */
-    color: #f0f0f0; /* White text for readability */
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 8px 14px;
+    font-size: 14px; /* Smaller font size for better balance */
+    border-radius: 10px; /* Rounded corners */
+    border: 1px solid #444; /* Darker border for contrast */
+    background-color: #2a2a2a;
+    color: #f0f0f0;
+    transition: all 0.3s ease-in-out, transform 0.2s ease;
     width: auto;
+    max-width: 200px; /* Reduced width for compactness */
 }
 
 .filter-section select:focus {
     border-color: #007bff;
     outline: none;
     box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    transform: scale(1.05); /* Slight scale effect on focus */
+}
+
+.filter-section select:hover {
+    background-color: #444; /* Slight hover effect */
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Improved responsiveness for smaller screens */
+@media (max-width: 768px) {
+    .filter-section {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .filter-section select {
+        max-width: 100%;
+    }
 }
 
 /* Screening List */
@@ -60,48 +148,51 @@ body {
     margin: 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 40px; /* Slightly larger gap between movie items */
+    gap: 30px; /* Slightly reduced gap for more compact layout */
+    margin-bottom: 40px; /* Extra space at the bottom */
 }
 
 .movie-item {
-    border: 1px solid #444; /* Darker borders */
+    border: 1px solid #444;
     border-radius: 15px;
     overflow: hidden;
-    background-color: #1f1f1f; /* Dark background for the movie item */
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25); /* Stronger shadow effect */
+    background-color: #1f1f1f;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
-    height: 450px; /* Increased height for better layout */
+    height: 460px;
     box-sizing: border-box;
+    position: relative;
 }
 
 .movie-item:hover {
     box-shadow: 0 12px 50px rgba(0, 0, 0, 0.35);
-    transform: translateY(-8px);
+    transform: translateY(-6px);
 }
 
 .movie-header {
-    background-color: #333; /* Dark header for better contrast */
+    background-color: #333;
     padding: 20px;
     display: flex;
     align-items: center;
     border-bottom: 1px solid #444;
     flex-grow: 1;
-    height: 90px; /* Increased header height */
+    height: 90px;
 }
 
 .movie-header h3 {
     margin: 0;
     flex-grow: 1;
-    font-size: 24px; /* Larger font size for better readability */
+    font-size: 24px;
     color: #fff;
     font-weight: 700;
     text-transform: capitalize;
+    letter-spacing: 1px;
 }
 
 .movie-poster {
-    height: 280px; /* Taller poster for a more dynamic look */
+    height: 300px;
     width: 100%;
     object-fit: cover;
     cursor: pointer;
@@ -110,7 +201,7 @@ body {
 }
 
 .movie-poster:hover {
-    transform: scale(1.05); /* Slightly smaller scale for hover effect */
+    transform: scale(1.05);
     opacity: 0.9;
 }
 
@@ -123,22 +214,26 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    border-radius: 15px;
 }
 
 .screening-details {
     margin-bottom: 25px;
-    font-size: 18px; /* Larger font for better readability */
+    font-size: 18px;
     color: #ccc;
     line-height: 1.8;
     font-weight: 400;
     text-align: left;
     padding: 0 20px;
+    background-color: #2a2a2a; /* Light background for contrast */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Location and Experience Text */
 .location,
 .experience {
-    font-size: 18px; /* Larger font for location and experience */
+    font-size: 16px;
     color: #fff;
     font-weight: 500;
     line-height: 1.7;
@@ -174,24 +269,48 @@ body {
     list-style: none;
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.screening-time {
+    font-size: 16px;
+    color: #fff;
+    background-color: #444;
+    padding: 10px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.screening-time:hover {
+    background-color: #007bff;
+    transform: translateY(-2px);
+}
+
+.screening-time:active {
+    background-color: #0056b3;
+    transform: translateY(2px);
 }
 
 /* Screening Button */
 .screening-button {
     display: inline-block;
     padding: 14px 24px;
-    background-color: #007bff;
+    background-color: #fbb03b;
     color: #fff;
     text-decoration: none;
     border-radius: 10px;
     font-size: 16px;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 0px;
     transition: background-color 0.3s, transform 0.3s ease;
 }
 
 .screening-button:hover {
-    background-color: #0056b3;
+    background-color: #e8a900;
     transform: translateY(-4px);
 }
 

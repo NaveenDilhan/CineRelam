@@ -66,6 +66,16 @@
 </head>
 <body>
     <div class="container">
+         <div class="page-title">
+            Book Your Ticket
+        </div>
+        <!-- Breadcrumb Section -->
+        <div class="breadcrumb">
+            <a href="home.jsp">Home</a> &gt;
+            <span>Book Your Ticket</span>
+        </div>
+
+        <hr class="separator"> <!-- Divider -->
         <!-- Filter Section -->
         <div class="filter-section">
             <label for="movieName">Movie Name:</label>

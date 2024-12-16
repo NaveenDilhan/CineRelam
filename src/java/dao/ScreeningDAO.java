@@ -101,7 +101,7 @@ public class ScreeningDAO {
     public List<Seats> getSeatsForScreening(int screeningId) {
         List<Seats> seats = new ArrayList<>();
         try (Connection conn = Databaseconnection.getConnection()) {
-            String query = "SELECT seatID, seatNumber, rowNumber, isBooked FROM seats WHERE screeningID = ?";
+            String query = "SELECT seatID, seatNumber, rowNumber, isBooked, SeatPrice FROM seats WHERE screeningID = ?";
             PreparedStatement pstmt = conn.prepareStatement(query);
             pstmt.setInt(1, screeningId);
             ResultSet rs = pstmt.executeQuery();
@@ -112,7 +112,8 @@ public class ScreeningDAO {
                         rs.getString("seatNumber"),
                         rs.getString("rowNumber"),
                         screeningId,
-                        rs.getBoolean("isBooked")
+                        rs.getBoolean("isBooked"),
+                        rs.getDouble("Seatprice")
                 );
                 seats.add(seat);
             }

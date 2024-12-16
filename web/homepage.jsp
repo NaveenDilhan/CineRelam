@@ -29,7 +29,7 @@
             <div class="swiper-slide">
               <div class="hero-text">
                 <h3><%= movie.getTitle() %></h3>
-                <a href="bookMovie.jsp?id=<%= movie.getId() %>" class="btn book-now">Book Now</a>
+                <a href="FilterScreenServlet?id=<%= movie.getId() %>" class="btn book-now">Book Now</a>
                 <a href="trailer.jsp?id=<%= movie.getId() %>" class="btn watch-trailer">Watch Trailer</a>
               </div>
               <img src="<%= movie.getPosterURL() %>" alt="<%= movie.getTitle() %>" class="hero-image" />
