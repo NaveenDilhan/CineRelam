@@ -1,0 +1,112 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212; /* Dark background */
+    color: #fff; /* White text */
+    margin-left: 250px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: linear-gradient(to right, #121212, #333);
+}
+
+h2 {
+    text-align: center;
+    color: #fbb03b; /* Updated to #fbb03b */
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.form-container {
+    background-color: #1f1f1f; /* Dark gray background for form */
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    animation: fadeInUp 1s ease-out;
+}
+
+label {
+    color: #fbb03b; /* Updated to #fbb03b */
+    font-size: 16px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #fbb03b; /* Updated to #fbb03b */
+    border-radius: 4px;
+    background-color: #2a2a2a; /* Dark background for input fields */
+    color: #fff; /* White text in input */
+    font-size: 16px;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+    border-color: #fbb03b; /* Updated to #fbb03b */
+    outline: none;
+    box-shadow: 0 0 8px rgba(251, 176, 59, 0.6); /* Subtle glowing effect with matching color */
+}
+
+/* Buttons */
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    border: none;
+    background-color: #fbb03b; /* Updated to #fbb03b */
+    color: #fff;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #e6892e; /* Darker shade of #fbb03b for hover */
+    transform: scale(1.05); /* Slight grow effect */
+}
+
+/* Redirect Link */
+.redirect-link {
+    text-align: center;
+    color: #fff;
+    margin-top: 15px;
+}
+
+.redirect-link a {
+    color: #fbb03b; /* Updated to #fbb03b */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.redirect-link a:hover {
+    color: #e6892e; /* Darker shade of #fbb03b for hover */
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

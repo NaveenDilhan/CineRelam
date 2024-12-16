@@ -1,0 +1,141 @@
+/* General Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212; /* Dark background for sleek look */
+    margin: 0;
+    color: #ffa31a; /* Bright yellow-orange text for contrast */
+}
+
+/* Page Title */
+.page-title {
+font-size: 36px;
+font-weight: 700;
+color: #fbb03b;
+text-align: center;
+margin-bottom: 40px;
+text-transform: uppercase;
+letter-spacing: 2px;
+text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+transition: all 0.3s ease;
+margin-left: 100px;
+}
+.page-title:hover {
+  color: #f0f0f0;
+  text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.9);
+}
+
+/* Breadcrumb Section Styling */
+.breadcrumb-section {
+    padding: 10px 20px;
+    background-color: #121212; /* Dark background */
+    color: #ffa31a; /* Bright yellow-orange text */
+    margin-left: 300px; /* Move the breadcrumb section towards the right */
+    margin-right: 20px; /* Prevent content from touching the right edge */
+    margin-top: 60px; /* Added top margin to ensure space from the header */
+}
+
+/* Breadcrumb Container */
+.breadcrumb-container {
+    font-size: 16px;
+}
+
+.breadcrumb-container a {
+    text-decoration: none;
+    color: #ffa31a; /* Bright yellow-orange links */
+}
+
+.breadcrumb-container a:hover {
+    text-decoration: underline;
+    color: #fbb03b; /* Lighter color on hover */
+}
+
+/* Deals Section Styling */
+.deals-section {
+    margin-top: 120px; /* Adjusted for header */
+    padding: 40px 20px;
+    margin-left: 300px; /* Move the content towards the right to avoid overlap with the header */
+    margin-right: 20px; /* Prevent content from touching the right edge */
+    background-color: #121212; /* Dark background for sleek look */
+}
+
+/* Container for Deals */
+.deals-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 20px 0; /* Adds padding to prevent content from touching the container's edges */
+}
+
+/* Individual Deal Container */
+.deal-container {
+    width: 280px; /* Set container width */
+    background-color: #212121; /* Dark card background */
+    border: 1px solid #fbb03b; /* Yellow border to match the theme */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 20px; /* Add bottom margin to space out deal containers */
+    color: #ffa31a; /* Bright yellow-orange text */
+}
+
+/* Hover Effect for Deal Container */
+.deal-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+/* Deal Image */
+.deal-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Deal Title */
+.deal-title {
+    font-size: 18px;
+    color: #fbb03b; /* Lighter yellow-orange title */
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* Deal Description */
+.deal-description {
+    font-size: 14px;
+    color: #f5f5f5; /* Lighter text for description */
+    margin-top: 10px;
+}
+
+/* Divider */
+.divider {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid #fbb03b; /* Yellow divider */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .breadcrumb-section {
+        margin-left: 20px; /* Make the breadcrumb section fit better on smaller screens */
+        margin-right: 20px;
+    }
+
+    .deals-section {
+        margin-left: 20px; /* Make the section fit better on smaller screens */
+        margin-right: 20px;
+    }
+
+    .deals-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .deal-container {
+        width: 90%; /* Make deal containers full-width on small screens */
+        margin-bottom: 20px;
+    }
+}

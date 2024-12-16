@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FilterScreenServlet extends HttpServlet {
@@ -24,6 +25,19 @@ public class FilterScreenServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String movieIdParam = request.getParameter("id");
+        int movieId = 0;
+
+        // Check if 'id' parameter exists and is a valid number
+        if (movieIdParam != null && !movieIdParam.isEmpty()) {
+            try {
+                movieId = Integer.parseInt(movieIdParam);
+            } catch (NumberFormatException e) {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid movie ID");
+                return;
+            }
+        }
+
         // Fetch dropdown options with exception handling
         List<String> movieTitles = movieDAO.getAllMovieTitles();
         List<String> locations = locationDAO.getAllLocations();
@@ -38,6 +52,21 @@ public class FilterScreenServlet extends HttpServlet {
         request.setAttribute("locations", locations);
         request.setAttribute("experiences", experiences);
 
+        List<Screening> screenings = new ArrayList<>();
+        if (movieId > 0) {
+            // If a specific movie ID is provided, show screenings related to that movie
+            screenings = screeningDAO.getScreeningsByMovieId(movieId);
+            request.setAttribute("selectedMovieId", movieId);
+        } else {
+            // If no specific movie ID, fetch all screenings or based on filters (if any)
+            String movieName = request.getParameter("movieName");
+            String locationName = request.getParameter("location");
+            String experience = request.getParameter("experience");
+
+            screenings = screeningDAO.getScreenings(movieName, locationName, experience);
+        }
+        request.setAttribute("screenings", screenings);
+
         // Forward to the JSP page
         request.getRequestDispatcher("book-ticket.jsp").forward(request, response);
     }
@@ -49,7 +78,7 @@ public class FilterScreenServlet extends HttpServlet {
         String experience = request.getParameter("experience");
 
         try {
-            // Fetch screenings from database
+            // Fetch screenings from database based on selected filters
             List<Screening> screenings = screeningDAO.getScreenings(movieName, locationName, experience);
             List<Movie> movies = movieDAO.getAllMovies();
 
@@ -63,6 +92,7 @@ public class FilterScreenServlet extends HttpServlet {
                     for (Movie movie : movies) {
                         if (movie.getId() == screening.getMovieID()) {
                             screening.setMovieTitle(movie.getTitle()); // Assuming setMovieTitle exists
+                            screening.setMoviePoster(movie.getPosterURL());
                         }
                     }
                 });

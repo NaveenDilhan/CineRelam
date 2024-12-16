@@ -1,0 +1,111 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000; /* Black background */
+    color: #fbb03b; /* Light orange text for contrast */
+    margin: 0;
+    padding: 0;
+}
+
+/* Container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh; /* Full height */
+    padding: 20px;
+    box-sizing: border-box;
+    margin-left: 250px; /* Create space from left to prevent clash with the header */
+}
+
+/* Locations Section */
+.locations {
+    background-color: #1c1c1c; /* Dark gray background for contrast */
+    padding: 30px;
+    border-radius: 8px; /* Rounded corners */
+    width: 100%;
+    max-width: 800px; /* Max width to prevent stretching */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Soft shadow for depth */
+}
+
+/* Title */
+.locations h2 {
+    font-size: 28px;
+    color: #fbb03b; /* Light orange color for the heading */
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Location List */
+ul {
+    list-style-type: none; /* Remove default list style */
+    padding: 0;
+}
+
+.location-item {
+    background-color: #2a2a2a; /* Darker background for each item */
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 6px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.location-item:hover {
+    background-color: #333; /* Lighter dark on hover */
+}
+
+.location-item h3 {
+    font-size: 24px;
+    color: #fbb03b; /* Light orange heading color */
+    margin: 0 0 10px;
+}
+
+.location-item p {
+    font-size: 16px;
+    color: #e0e0e0; /* Softer white for readability */
+    margin: 0;
+}
+
+/* Footer */
+footer {
+    background-color: #1c1c1c;
+    color: #fbb03b;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+    color: #e0e0e0;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        margin-left: 0; /* Full width for smaller screens */
+    }
+
+    .locations {
+        width: 90%; /* Full width for smaller screens */
+        padding: 20px; /* Reduce padding for smaller screens */
+    }
+
+    .location-item {
+        padding: 15px; /* Reduce padding in each item */
+    }
+
+    .location-item h3 {
+        font-size: 20px; /* Slightly smaller headings */
+    }
+
+    .location-item p {
+        font-size: 14px; /* Smaller text for readability */
+    }
+}

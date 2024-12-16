@@ -18,7 +18,7 @@
 
                 <!-- Breadcrumb Section -->
                 <nav class="breadcrumb">
-                    <a href="index.jsp">Home</a> &gt;
+                    <a href="homepage">Home</a> &gt;
                     <span>Movies</span>
                 </nav>
             </div>

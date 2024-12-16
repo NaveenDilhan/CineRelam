@@ -52,7 +52,7 @@
         </div>
         <!-- Footer Bottom -->
         <div class="footer-bottom">
-            <p>&copy; 2024 MovieTicketPro. All Rights Reserved.</p>
+            <p>&copy; 2024 CineRealm. All Rights Reserved.</p>
         </div>
     </footer>
 </body>
